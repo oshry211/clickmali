@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="הדילים הכי שווים מאלי אקספרס, בקליק אחד. מוצרים נבדקים, קופונים ומשלוח לישראל.">
+<meta property="og:title" content="קליק מאלי">
+<meta property="og:description" content="הדילים הכי שווים מאלי אקספרס, בקליק אחד.">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>קליק מאלי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karantina:wght@700&family=Assistant:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: sticky header, hero styled like a parcel tracking ticket, filter row, deal grid of "shipping label" cards, how-it-works, Facebook band, disclosure footer */
+:root{
+  --paper:#F3F5F9; --card:#FFFFFF; --ink:#121522; --muted:#5A6276; --line:#DCE1EB;
+  --hot:#F2441B; --hot-ink:#FFFFFF; --tag:#FFE6DC; --tag-ink:#B32C0A; --good:#0E8A55;
+  --display:"Karantina","Assistant",system-ui,sans-serif;
+  --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E1119; --card:#161A25; --ink:#EDF0F6; --muted:#9AA2B6; --line:#272D3C;
+  --hot:#FF6236; --hot-ink:#140804; --tag:#3B1C12; --tag-ink:#FFB49C; --good:#3FD08F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E1119; --card:#161A25; --ink:#EDF0F6; --muted:#9AA2B6; --line:#272D3C;
+  --hot:#FF6236; --hot-ink:#140804; --tag:#3B1C12; --tag-ink:#FFB49C; --good:#3FD08F; color-scheme:dark}
+
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+.site{direction:rtl}
+.wrap{max-width:1120px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--hot);outline-offset:2px;border-radius:6px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:36px;height:36px;border-radius:10px;background:var(--hot);display:grid;place-items:center}
+.logo-mark svg{width:20px;height:20px}
+.logo b{font-family:var(--display);font-size:32px;line-height:1;letter-spacing:.5px}
+.fb-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--ink);font-weight:800;text-decoration:none;font-size:15px;white-space:nowrap}
+.fb-btn:hover{background:var(--ink);color:var(--paper)}
+
+/* hero */
+.hero{padding-block:40px 28px}
+.ticket{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;position:relative;overflow:hidden}
+.ticket::after{content:"";position:absolute;inset-block:0;left:0;width:8px;background:repeating-linear-gradient(180deg,var(--hot) 0 10px,transparent 10px 18px)}
+.track{font-family:var(--mono);font-size:13px;color:var(--muted);direction:ltr;text-align:right}
+.hero h1{font-family:var(--display);font-size:clamp(64px,14vw,132px);line-height:.85;margin:10px 0 12px;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--hot)}
+.hero p{max-width:46ch;margin:0;font-size:18px;color:var(--muted)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:800;font-size:16px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.btn-hot{background:var(--hot);color:var(--hot-ink)}
+.btn-hot:hover{filter:brightness(1.08)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.stamp{text-align:center;border:2px dashed var(--line);border-radius:14px;padding:14px 18px;min-width:150px}
+.stamp .n{font-family:var(--display);font-size:56px;line-height:1;color:var(--hot)}
+.stamp .l{font-size:14px;color:var(--muted);font-weight:600}
+@media (max-width:640px){.ticket{grid-template-columns:1fr;padding:22px 20px}.stamp{display:flex;gap:12px;align-items:center;justify-content:center;min-width:0}}
+
+/* filters */
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-block:8px 18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 14px;font:600 15px var(--body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.search{flex:1 1 220px;max-width:320px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:16px var(--body)}
+h2{font-family:var(--display);font-size:48px;line-height:1;margin:24px 0 4px;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+
+/* deals */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.deal{background:var(--card);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.thumb{aspect-ratio:1/1;max-width:100%;background:var(--paper);display:grid;place-items:center;position:relative;overflow:hidden;border-bottom:1px dashed var(--line)}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thumb svg{width:38%;height:auto;color:var(--muted)}
+.off{position:absolute;z-index:1;top:10px;right:10px;background:var(--hot);color:var(--hot-ink);font-weight:800;font-size:14px;padding:3px 10px;border-radius:8px}
+.example{position:absolute;z-index:1;top:10px;left:10px;background:var(--card);color:var(--muted);font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid var(--line)}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cat{font-size:13px;font-weight:600;color:var(--tag-ink);background:var(--tag);align-self:flex-start;padding:1px 9px;border-radius:6px}
+.deal h3{font-size:17px;line-height:1.35;margin:0;font-weight:800}
+.price{display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}
+.price b{font-size:26px;font-weight:800}
+.price s{color:var(--muted);font-size:15px}
+.meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;color:var(--muted)}
+.meta .ship{color:var(--good);font-weight:600}
+.coupon{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1.5px dashed var(--line);border-radius:10px;padding:6px 6px 6px 10px}
+.coupon span{font-size:13px;color:var(--muted)}
+.coupon code{font-family:var(--mono);font-size:14px;direction:ltr}
+.copy{border:0;background:var(--paper);color:var(--ink);border-radius:8px;padding:6px 10px;font:600 13px var(--body);cursor:pointer}
+.deal .btn{margin-top:auto;justify-content:center}
+.more-wrap{display:flex;justify-content:center;margin-top:20px}
+.empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)}
+
+/* how */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;counter-reset:s}
+.step{border-top:3px solid var(--ink);padding-top:12px}
+.step b{display:block;font-family:var(--display);font-size:30px;line-height:1.1}
+.step b::before{counter-increment:s;content:counter(s) ". ";color:var(--hot)}
+.step p{margin:4px 0 0;color:var(--muted)}
+@media (max-width:640px){.steps{grid-template-columns:1fr}}
+
+.band{background:var(--ink);color:var(--paper);margin-top:48px}
+.band .wrap{padding-block:36px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.band h2{margin:0;color:var(--paper)}
+.band p{margin:4px 0 0;opacity:.8}
+footer{padding-block:28px 40px;color:var(--muted);font-size:14px}
+footer p{max-width:70ch;margin:0 0 8px}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:10px;font-weight:600;z-index:20}
+@media (prefers-reduced-motion:no-preference){.deal{transition:transform .15s}.deal:hover{transform:translateY(-3px)}}
+</style>
+</head>
+<body>
+
+<div class="site" lang="he" dir="rtl">
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="קליק מאלי, לראש העמוד">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v6M4.5 5.5l3 3M3 10h6"/><path d="M12 12l8 3-3.5 1.5L15 20z"/></svg></span>
+      <b>קליק מאלי</b>
+    </a>
+    <a class="fb-btn" id="fbTop" href="https://www.facebook.com/profile.php?id=61595707464001" target="_blank" rel="noopener">לעמוד בפייסבוק</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <div class="ticket">
+      <div>
+        <div class="track">TRACKING · CM-IL-2026 · ALIEXPRESS → ISRAEL</div>
+        <h1>הדילים <em>הכי שווים</em> מאלי, בקליק</h1>
+        <p>אני עובר על אלפי מוצרים באלי אקספרס ומביא לכם רק את מה ששווה: מחיר טוב, ביקורות טובות ומשלוח לישראל.</p>
+        <div class="hero-cta">
+          <a class="btn btn-hot" href="#deals">לדילים של היום ←</a>
+          <a class="btn btn-ghost" href="#how">איך זה עובד?</a>
+        </div>
+      </div>
+      <div class="stamp" aria-label="דילים חדשים כל יום">
+        <div class="n" id="dealCount">8</div>
+        <div class="l">דילים נבחרים<br>עודכן: 19.10.2026</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="deals">
+    <h2>דילים של היום</h2>
+    <p class="sub">המחירים בשקלים ומשתנים כל הזמן. המחיר הסופי מופיע בעמוד המוצר באלי.</p>
+    <div class="bar">
+      <div class="chips" id="chips" role="group" aria-label="סינון לפי קטגוריה"></div>
+      <input class="search" id="q" type="search" placeholder="חיפוש מוצר…" aria-label="חיפוש מוצר">
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="more-wrap"><button class="btn btn-ghost" id="more" hidden>עוד דילים</button></div>
+  </section>
+
+  <section class="wrap" id="how">
+    <h2>איך זה עובד?</h2>
+    <div class="steps">
+      <div class="step"><b>בוחרים דיל</b><p>כל מוצר כאן נבדק: דירוג, כמות הזמנות ומשלוח לישראל.</p></div>
+      <div class="step"><b>לוחצים ועוברים לאלי</b><p>הכפתור לוקח אתכם ישר לעמוד המוצר באלי אקספרס. יש קופון? מעתיקים אותו קודם.</p></div>
+      <div class="step"><b>קונים במחיר הרגיל</b><p>אתם משלמים בדיוק אותו מחיר. אני מקבל עמלה קטנה מאלי, וזה מה שמחזיק את הדף.</p></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div>
+        <h2>רוצים את הדילים לפני כולם?</h2>
+        <p>עוקבים אחרי קליק מאלי בפייסבוק ומקבלים דילים חדשים כל יום.</p>
+      </div>
+      <a class="btn btn-hot" id="fbBand" href="https://www.facebook.com/profile.php?id=61595707464001" target="_blank" rel="noopener">לעקוב בפייסבוק</a>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <p><strong>גילוי נאות:</strong> באתר יש קישורי שותפים של AliExpress. כשקונים דרכם אני עשוי לקבל עמלה, בלי שום עלות נוספת לכם.</p>
+    <p>המחירים, הקופונים וזמני המשלוח נקבעים על ידי אלי אקספרס ויכולים להשתנות. תמיד כדאי לבדוק בעמוד המוצר לפני הקנייה.</p>
+    <p>© 2026 קליק מאלי</p>
+  </footer>
+</main>
+<div class="toast" id="toast" hidden></div>
+</div>
+
+<script>
+/* ===== כאן מעדכנים את הדילים =====
+   url  = קישור השותפים שלך מפורטל השותפים (s.click.aliexpress.com/e/...)
+   img  = כתובת תמונה של המוצר (לא חובה)
+   example:true = מסומן "דוגמה" עד שמחליפים במוצר אמיתי */
+const DEALS = [
+  {"title": "מחזיק טלפון מגנטי חזק (MagSafe) לרכב ולקיר", "cat": "לרכב", "price": 5, "was": 13, "rating": 4.7, "orders": "2K+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/S35f03ecefcba42699449f0cdc841bfa6K.jpg", "url": "https://s.click.aliexpress.com/e/_c4nlLVRF"},
+  {"title": "מארגן כבלים מסיליקון לשולחן העבודה", "cat": "לבית", "price": 3, "was": 7, "rating": 4.9, "orders": "47K+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/S38b3d59afd164749bcb141e473f987f8Q.jpg", "url": "https://s.click.aliexpress.com/e/_c3DBJ61x"},
+  {"title": "מטען מהיר 65W עם יציאות USB-C ו-USB", "cat": "לטלפון", "price": 8, "was": 16, "rating": 4.9, "orders": "11K+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/S9072e20c109a46f3ba9e2066c90c028ao.jpg", "url": "https://s.click.aliexpress.com/e/_c3sp2wA9"},
+  {"title": "מקל סלפי וחצובה עם שלט בלוטות' נתיק", "cat": "לטלפון", "price": 20, "was": 41, "rating": 4.7, "orders": "900+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/S9baaeaa724614f5d82e67dc41c122ea9N.jpg", "url": "https://s.click.aliexpress.com/e/_c3J5liS9"},
+  {"title": "סוללה ניידת מגנטית UGREEN Qi2 ‏10000mAh", "cat": "לטלפון", "price": 131, "was": 327, "rating": 4.8, "orders": "1K+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/S11f6077616c644f68121f54f9e80843dt.jpg", "url": "https://s.click.aliexpress.com/e/_c32AH7VP"},
+  {"title": "מברשת ניקוי חשמלית אלחוטית עם 5 ראשים", "cat": "לבית", "price": 37, "was": 82, "rating": 4.6, "orders": "700+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/Sc18cf4013d314bef92a5291a76297a586.jpg", "url": "https://s.click.aliexpress.com/e/_c3wlRrLx"},
+  {"title": "מנורת לילה עם חיישן תנועה, נטענת ומגנטית", "cat": "לבית", "price": 9, "was": 23, "rating": 4.6, "orders": "300+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/S3d3db438dc0a4e028d94663ebb91d496a.jpg", "url": "https://s.click.aliexpress.com/e/_c3nbzEut"},
+  {"title": "אוזניות בלוטות' אלחוטיות עם ביטול רעשים", "cat": "גאדג'טים", "price": 43, "was": 97, "rating": 4.6, "orders": "200+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/Sc0a06ec96fd2480590c5e62dea8aadc7r.jpg", "url": "https://s.click.aliexpress.com/e/_c3fioBqD"},
+  {"title": "תיק צד נגד גניבות, עמיד למים עם יציאת USB", "cat": "אופנה", "price": 140, "was": 293, "rating": 4.9, "orders": "200+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/Sbba9b0d397ef4f88a2c9dad8d20fa144x.jpg", "url": "https://s.click.aliexpress.com/e/_c3UDW3f7"},
+  {"title": "משאבת אוויר זעירה FLEXTAIL עם פנס קמפינג", "cat": "גאדג'טים", "price": 96, "was": 276, "rating": 4.8, "orders": "1K+", "ship": "", "coupon": "", "img": "https://ae-pic-a1.aliexpress-media.com/kf/Sa12878016bf84108ad365f51e141c767k.jpg", "url": "https://s.click.aliexpress.com/e/_c3vzCpsH"}
+];
+
+const ICONS = {
+  "גאדג'טים":'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 26a14 14 0 0 1 28 0"/><rect x="6" y="26" width="8" height="12" rx="3"/><rect x="34" y="26" width="8" height="12" rx="3"/></svg>',
+  "לטלפון":'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="14" y="4" width="20" height="40" rx="4"/><path d="M21 38h6"/></svg>',
+  "לרכב":'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 30l4-11c1-3 3-4 6-4h16c3 0 5 1 6 4l4 11v8H6z"/><circle cx="14" cy="32" r="3"/><circle cx="34" cy="32" r="3"/></svg>',
+  "לבית":'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 22L24 7l18 15"/><path d="M11 19v22h26V19"/><path d="M20 41V29h8v12"/></svg>',
+  "אופנה":'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 6l-11 7 4 8 5-2v23h18V19l5 2 4-8-11-7c-1 4-4 6-7 6s-6-2-7-6z"/></svg>'
+};
+
+const grid = document.getElementById('grid'), chips = document.getElementById('chips'), q = document.getElementById('q');
+let current = 'הכול';
+let shown = 24;
+const PAGE = 24;
+const cats = ['הכול', ...new Set(DEALS.map(d => d.cat))];
+document.getElementById('dealCount').textContent = DEALS.length;
+
+cats.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.textContent = c; b.id = 'chip-' + cats.indexOf(c);
+  b.setAttribute('aria-pressed', c === current);
+  b.onclick = () => { current = c; shown = PAGE; chips.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x.textContent === c)); render(); };
+  chips.appendChild(b);
+});
+q.addEventListener('input', () => { shown = PAGE; render(); });
+document.getElementById('more').onclick = () => { shown += PAGE; render(); };
+
+function esc(s){return String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+
+function render(){
+  const term = q.value.trim();
+  const list = DEALS.filter(d => (current === 'הכול' || d.cat === current) && (!term || d.title.includes(term)));
+  document.getElementById('more').hidden = list.length <= shown;
+  if (!list.length) { grid.innerHTML = '<div class="empty">לא מצאנו מוצר כזה. נסו מילה אחרת או קטגוריה אחרת.</div>'; return; }
+  grid.innerHTML = list.slice(0, shown).map(d => {
+    const off = d.was ? Math.round((1 - d.price / d.was) * 100) : 0;
+    const img = d.img ? `<img src="${esc(d.img)}" alt="" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(ICONS['${d.cat}']||''))">` : (ICONS[d.cat] || '');
+    return `<article class="deal">
+      <div class="thumb">${img}${off ? `<span class="off">‎-${off}%</span>` : ''}${d.example ? '<span class="example">דוגמה</span>' : ''}</div>
+      <div class="body">
+        <span class="cat">${esc(d.cat)}</span>
+        <h3>${esc(d.title)}</h3>
+        <div class="price"><b>₪${d.price}</b>${d.was ? `<s>₪${d.was}</s>` : ''}</div>
+        <div class="meta"><span>★ ${d.rating}</span><span>${esc(d.orders)} הזמנות</span>${d.ship ? `<span class="ship">משלוח לישראל: ${esc(d.ship)}</span>` : '<span class="ship">נשלח לישראל</span>'}</div>
+        ${d.coupon ? `<div class="coupon"><span>קופון: <code>${esc(d.coupon)}</code></span><button class="copy" data-code="${esc(d.coupon)}">העתקה</button></div>` : ''}
+        <a class="btn btn-hot" href="${esc(d.url)}" target="_blank" rel="noopener sponsored">לקנייה באלי ←</a>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+grid.addEventListener('click', e => {
+  const b = e.target.closest('.copy'); if (!b) return;
+  const code = b.dataset.code;
+  const ok = () => toast('הקופון ' + code + ' הועתק');
+  try { navigator.clipboard.writeText(code).then(ok, () => toast('הקופון: ' + code)); } catch(_) { toast('הקופון: ' + code); }
+});
+let t;
+function toast(msg){ const el = document.getElementById('toast'); el.textContent = msg; el.hidden = false; clearTimeout(t); t = setTimeout(() => el.hidden = true, 2200); }
+render();
+</script>
+</body>
+</html>
