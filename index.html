@@ -14,17 +14,17 @@
 /* Layout: sticky header, hero styled like a parcel tracking ticket, filter row, deal grid of "shipping label" cards, how-it-works, Facebook band, disclosure footer */
 :root{
   --paper:#F3F5F9; --card:#FFFFFF; --ink:#121522; --muted:#5A6276; --line:#DCE1EB;
-  --hot:#F2441B; --hot-ink:#FFFFFF; --tag:#FFE6DC; --tag-ink:#B32C0A; --good:#0E8A55;
+  --hot:#F2441B; --tg:#2481CC; --hot-ink:#FFFFFF; --tag:#FFE6DC; --tag-ink:#B32C0A; --good:#0E8A55;
   --display:"Karantina","Assistant",system-ui,sans-serif;
   --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#0E1119; --card:#161A25; --ink:#EDF0F6; --muted:#9AA2B6; --line:#272D3C;
-  --hot:#FF6236; --hot-ink:#140804; --tag:#3B1C12; --tag-ink:#FFB49C; --good:#3FD08F; color-scheme:dark}}
+  --hot:#FF6236; --tg:#2B8FD6; --hot-ink:#140804; --tag:#3B1C12; --tag-ink:#FFB49C; --good:#3FD08F; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#0E1119; --card:#161A25; --ink:#EDF0F6; --muted:#9AA2B6; --line:#272D3C;
-  --hot:#FF6236; --hot-ink:#140804; --tag:#3B1C12; --tag-ink:#FFB49C; --good:#3FD08F; color-scheme:dark}
+  --hot:#FF6236; --tg:#2B8FD6; --hot-ink:#140804; --tag:#3B1C12; --tag-ink:#FFB49C; --good:#3FD08F; color-scheme:dark}
 
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
@@ -42,6 +42,13 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .logo b{font-family:var(--display);font-size:32px;line-height:1;letter-spacing:.5px}
 .fb-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--ink);font-weight:800;text-decoration:none;font-size:15px;white-space:nowrap}
 .fb-btn:hover{background:var(--ink);color:var(--paper)}
+.head-links{display:flex;gap:8px;align-items:center}
+.tg-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:var(--tg);color:#fff;font-weight:800;text-decoration:none;font-size:15px;white-space:nowrap}
+.tg-btn:hover{filter:brightness(1.08)}
+.band-btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn-tg{background:var(--tg);color:#fff}
+.btn-tg:hover{filter:brightness(1.08)}
+@media (max-width:520px){.fb-btn{display:none}}
 
 /* hero */
 .hero{padding-block:40px 28px}
@@ -121,7 +128,10 @@ footer p{max-width:70ch;margin:0 0 8px}
       <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v6M4.5 5.5l3 3M3 10h6"/><path d="M12 12l8 3-3.5 1.5L15 20z"/></svg></span>
       <b>קליק מאלי</b>
     </a>
+    <div class="head-links">
+    <a class="tg-btn" id="tgTop" href="https://t.me/klickmeali2025" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M21.6 4.2 2.9 11.4c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.4-1.5ZM8.9 14.1l9.3-5.9c.4-.3.8-.1.5.2l-7.6 6.9-.3 3.3-1.9-4.5Z"/></svg>טלגרם</a>
     <a class="fb-btn" id="fbTop" href="https://www.facebook.com/profile.php?id=61595707464001" target="_blank" rel="noopener">לעמוד בפייסבוק</a>
+    </div>
   </div>
 </header>
 
@@ -134,6 +144,7 @@ footer p{max-width:70ch;margin:0 0 8px}
         <p>אני עובר על אלפי מוצרים באלי אקספרס ומביא לכם רק את מה ששווה: מחיר טוב, ביקורות טובות ומשלוח לישראל.</p>
         <div class="hero-cta">
           <a class="btn btn-hot" href="#deals">לדילים של היום ←</a>
+          <a class="btn btn-tg" href="https://t.me/klickmeali2025" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M21.6 4.2 2.9 11.4c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.4-1.5ZM8.9 14.1l9.3-5.9c.4-.3.8-.1.5.2l-7.6 6.9-.3 3.3-1.9-4.5Z"/></svg>דילים בטלגרם</a>
           <a class="btn btn-ghost" href="#how">איך זה עובד?</a>
         </div>
       </div>
@@ -168,9 +179,12 @@ footer p{max-width:70ch;margin:0 0 8px}
     <div class="wrap">
       <div>
         <h2>רוצים את הדילים לפני כולם?</h2>
-        <p>עוקבים אחרי קליק מאלי בפייסבוק ומקבלים דילים חדשים כל יום.</p>
+        <p>מצטרפים לערוץ הטלגרם של קליק מאלי ומקבלים התראה על כל דיל חדש, ישר לטלפון.</p>
       </div>
-      <a class="btn btn-hot" id="fbBand" href="https://www.facebook.com/profile.php?id=61595707464001" target="_blank" rel="noopener">לעקוב בפייסבוק</a>
+      <div class="band-btns">
+        <a class="btn btn-tg" id="tgBand" href="https://t.me/klickmeali2025" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M21.6 4.2 2.9 11.4c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.4-1.5ZM8.9 14.1l9.3-5.9c.4-.3.8-.1.5.2l-7.6 6.9-.3 3.3-1.9-4.5Z"/></svg>להצטרף לטלגרם</a>
+        <a class="btn btn-hot" id="fbBand" href="https://www.facebook.com/profile.php?id=61595707464001" target="_blank" rel="noopener">לעקוב בפייסבוק</a>
+      </div>
     </div>
   </section>
 
